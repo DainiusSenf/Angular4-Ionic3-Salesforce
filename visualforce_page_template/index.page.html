@@ -1,0 +1,37 @@
+<% if (!local) { %>
+<apex:page controller="<%= controller %>" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+<% } %>
+<html>
+	<head>
+		<base href="<%= baseUrl %>"/>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Angular 2 Salesforce Test</title>
+		<script type="text/javascript"> if(!window._sf) window._sf = {} </script>
+		<% if (local) { %>
+			<script type="text/javascript">
+				window.local = true;
+				window._sf.auth = <%= auth %>
+			</script>
+		<% } else { %>
+			<script type="text/javascript">
+	    	window._sf.api = "{!JSENCODE($Api.Session_ID)}";
+        window._sf.userId = "{!$User.Id}";
+			</script>
+		<% } %>
+	</head>
+	<body>
+		  <app-root>Loading...</app-root>
+
+            <script src="<%= app_directory %>inline.bundle.js"></script>
+    <script src="<%= app_directory %>polyfills.bundle.js"></script>
+    <script src="<%= app_directory %>scripts.bundle.js"></script>
+    <script src="<%= app_directory %>styles.bundle.js"></script>
+    <script src="<%= app_directory %>vendor.bundle.js"></script>
+	<script src="<%= app_directory %>main.bundle.js"></script>
+
+	</body>
+</html>
+<% if (!local) { %>
+</apex:page>
+<% } %>
