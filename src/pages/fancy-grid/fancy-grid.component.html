@@ -1,8 +1,11 @@
-<div class="grid-x">
-  <div style="padding: 10px; margin: 10px">
-    <div id='claimsTable'></div>
-  </div>
-  <div  style="padding: 10px; margin: 10px">
-    <chart id="stackedAreaChart" [options]="pieChartConfig"></chart>
-  </div>
-</div>
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-6>
+      <div id='claimsTable'></div>
+    </ion-col>
+    <ion-col col-6>
+      <chart id="stackedAreaChart" [options]="pieChartConfig"></chart>
+    </ion-col>
+  </ion-row>
+</ion-grid>

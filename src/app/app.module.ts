@@ -21,7 +21,9 @@ import {ClaimService} from "../services/claim.service";
 import {CountryTableComponent} from "../pages/country-table/country-table.component";
 import {StatusTableComponent} from "../pages/status-table/status-table.component";
 import {ProfileComponent} from "../pages/profile/profile.component";
-import {SalesforceResolver} from "../services/salesforceResolver.service";
+import {SalesforceAuthenticate} from "../services/salesforceAuthenticate.service";
+import {LogoutComponent} from "../pages/logout/logout";
+import {ProfileInfoPage} from "../pages/profile-info/profile-info";
 
 export function highchartsFactory() {
   // Initialize addons.
@@ -39,8 +41,9 @@ export function highchartsFactory() {
     FancyGridComponent,
     CountryTableComponent,
     StatusTableComponent,
-    ProfileComponent
-
+    ProfileComponent,
+    LogoutComponent,
+    ProfileInfoPage
   ],
   imports: [
     BrowserModule,
@@ -51,15 +54,15 @@ export function highchartsFactory() {
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
-    FancyGridComponent
+    ProfileInfoPage,
+    LogoutComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     SalesforceService,
     ClaimService,
-    SalesforceResolver,
+    SalesforceAuthenticate,
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
@@ -67,8 +70,8 @@ export function highchartsFactory() {
     {
       provide: APP_INITIALIZER,
       useFactory:
-        (config: SalesforceResolver) => () => config.resolve(),
-        deps: [SalesforceResolver],
+        (config: SalesforceAuthenticate) => () => config.authenticate(),
+        deps: [SalesforceAuthenticate],
         multi: true
     },
     {

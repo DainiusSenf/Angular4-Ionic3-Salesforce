@@ -102,15 +102,18 @@ module.exports = function(gulp, config) {
 	gulp.task('package-resources', gulp.parallel('package:app'));
 
 	gulp.task('tempgen', gulp.series(
-		'ng-build',
+		// 'ng-build',
 		'init-deploy',
+    'assets',
+		'build',
+		'manifest:prod',
 		gulp.parallel('tempgen:app', 'tempgen:visualforce'),
 		'package-resources',
 		'clean-resources',
 		'tempgen:salesforce',
 		'tempgen:pxml',
-		'tempgen:meta-xml',
-		'clean-build-page'
+		'tempgen:meta-xml'
+		// 'clean-build-page'
 	));
 
 	gulp.task('deploy:jsforce', () => {

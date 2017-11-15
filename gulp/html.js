@@ -12,9 +12,14 @@ module.exports = function(gulp, config) {
 	};
 
 	gulp.task('html:prod', () => {
-		return gulp.src(['dist/*.html'])
+		return gulp.src(['www/*.html'])
 			.pipe(gulp.dest('build'));
 	});
+
+  gulp.task('manifest:prod', () => {
+    return gulp.src(['www/*.json'])
+      .pipe(gulp.dest('build'));
+});
 
 	gulp.task('visualforce:prod', () => {
 		return gulp.src(`visualforce_page_template/${config.visualforce.template}`)

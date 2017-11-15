@@ -1,6 +1,6 @@
-<% if (!local) { %>
-<apex:page controller="<%= controller %>" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
-<% } %>
+
+<apex:page controller="CTRL_WTaxCommunityApp" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+
 <html>
 <head>
   <meta charset="UTF-8"/>
@@ -9,8 +9,8 @@
   <meta name="format-detection" content="telephone=no"/>
   <meta name="msapplication-tap-highlight" content="no"/>
 
-  <link rel="icon" type="image/x-icon" href="<%= app_directory %>assets/icon/favicon.ico"/>
-  <link rel="manifest" href="<%= app_directory %>manifest.json"/>
+  <link rel="icon" type="image/x-icon" href="{!URLFOR($Resource.IonicApp)}/assets/icon/favicon.ico"/>
+  <link rel="manifest" href="{!URLFOR($Resource.IonicApp)}/manifest.json"/>
   <meta name="theme-color" content="#4e8ef7"/>
 
   <!-- add to homescreen for ios -->
@@ -19,18 +19,13 @@
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <!--<script src="cordova.js"></script>-->
-  <script src="<%= app_directory %>assets/js/fancy.min.js"></script>
+  <script src="{!URLFOR($Resource.IonicApp)}/assets/js/fancy.min.js"></script>
   <script type="text/javascript"> if(!window._sf) window._sf = {} </script>
-  <% if (local) { %>
-  <script type="text/javascript">
-    window.local = true;
-    window._sf.auth = <%= auth %>
-  </script>
-  <% } else { %>
+  
   <script type="text/javascript">
     window._sf.api = "{!JSENCODE($Api.Session_ID)}";
   </script>
-  <% } %>
+  
   <!-- un-comment this code to enable service worker
   <script>
     if ('serviceWorker' in navigator) {
@@ -40,14 +35,14 @@
     }
   </script>-->
 
-  <link href="<%= app_directory %>build/main.css" rel="stylesheet"/>
-  <link href="<%= app_directory %>assets/css/fancy.min.css" rel="stylesheet"/>
+  <link href="{!URLFOR($Resource.IonicApp)}/build/main.css" rel="stylesheet"/>
+  <link href="{!URLFOR($Resource.IonicApp)}/assets/css/fancy.min.css" rel="stylesheet"/>
 
 
 </head>
 
 	<head>
-		<base href="<%= baseUrl %>"/>
+		<base href="/apex/VF_IonicApp"/>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>WTax community app</title>
@@ -59,17 +54,17 @@
   <ion-app></ion-app>
 
   <!-- The polyfills js is generated during the build process -->
-  <script src="<%= app_directory %>build/polyfills.js"></script>
+  <script src="{!URLFOR($Resource.IonicApp)}/build/polyfills.js"></script>
 
   <!-- The vendor js is generated during the build process
        It contains all of the dependencies in node_modules -->
-  <script src="<%= app_directory %>build/vendor.js"></script>
+  <script src="{!URLFOR($Resource.IonicApp)}/build/vendor.js"></script>
 
   <!-- The main bundle js is generated during the build process -->
-  <script src="<%= app_directory %>build/main.js"></script>
+  <script src="{!URLFOR($Resource.IonicApp)}/build/main.js"></script>
 
   </body>
 </html>
-<% if (!local) { %>
+
 </apex:page>
-<% } %>
+

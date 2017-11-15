@@ -1,8 +1,10 @@
-<div class="grid-x">
-  <div  style="padding: 10px; margin: 10px">
-    <div id='statusTable'></div>
-  </div>
-  <div  style="padding: 10px; margin: 10px">
-    <chart id="statusPieChart" [options]="pieChartConfig"></chart>
-  </div>
-</div>
+<ion-grid>
+  <ion-row>
+    <ion-col col-6>
+      <div id='statusTable'></div>
+    </ion-col>
+    <ion-col col-6>
+      <chart id="statusPieChart" [options]="pieChartConfig"></chart>
+    </ion-col>
+  </ion-row>
+</ion-grid>

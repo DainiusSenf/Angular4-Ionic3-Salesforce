@@ -71,6 +71,19 @@ export class SalesforceService {
 		}
 	}
 
+	public logout(){
+    if (!this.conn) {
+      this.conn.logout(function (err) {
+        if (err) {
+          return console.error(err);
+        }
+        // now the session has been expired.
+      });
+    } else {
+      console.log('Session does not exist');
+    }
+  }
+
 	/**
 	 * @param  {string} controller 	        - The APEX controller to use
 	 * @param  {string} method 				- The method to execute on the controller. To use

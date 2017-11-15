@@ -13,8 +13,12 @@ export class ProfileComponent implements OnInit {
 
   constructor(private claimService: ClaimService) {
     this.claimService.getUserInformation().then(res => {
-      this.clientName = res[0].Contact.Account.Name;
-      this.crmName = res[0].Contact.Account.CRM__r.Name;
+      console.log('profile');
+      console.log(res);
+      if(res && res[0].Contact) {
+        this.clientName = res[0].Contact.Account.Name;
+        this.crmName = res[0].Contact.Account.CRM__r.Name;
+      }
       this.userInfo = res;
     });
   }

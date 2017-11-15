@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+
+<apex:page controller="AngularAppController" showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Ionic App</title>
@@ -19,10 +21,11 @@
   <script src="cordova.js"></script>
   <script src="assets/js/fancy.min.js"></script>
   <script type="text/javascript"> if(!window._sf) window._sf = {} </script>
+  
   <script type="text/javascript">
-    window.local = true;
-    window._sf.auth = {"username":"","password":"","login_url":"https://test.salesforce.com","api_version":41}
+    window._sf.api = "{!JSENCODE($Api.Session_ID)}";
   </script>
+  
   <!-- un-comment this code to enable service worker
   <script>
     if ('serviceWorker' in navigator) {
@@ -37,20 +40,26 @@
 
 
 </head>
-<body>
 
-  <!-- Ionic's root component and where the app will load -->
-  <ion-app></ion-app>
+	<head>
+		<base href="/apex/AngularApp"/>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Angular 2 Salesforce Test</title>
 
-  <!-- The polyfills js is generated during the build process -->
-  <script src="build/polyfills.js"></script>
+	</head>
+	<body>
+		  <app-root>Loading...</app-root>
 
-  <!-- The vendor js is generated during the build process
-       It contains all of the dependencies in node_modules -->
-  <script src="build/vendor.js"></script>
+            <script src="{!URLFOR($Resource.IonicApp)}/inline.bundle.js"></script>
+    <script src="{!URLFOR($Resource.IonicApp)}/polyfills.bundle.js"></script>
+    <script src="{!URLFOR($Resource.IonicApp)}/scripts.bundle.js"></script>
+    <script src="{!URLFOR($Resource.IonicApp)}/styles.bundle.js"></script>
+    <script src="{!URLFOR($Resource.IonicApp)}/vendor.bundle.js"></script>
+	<script src="{!URLFOR($Resource.IonicApp)}/main.bundle.js"></script>
 
-  <!-- The main bundle js is generated during the build process -->
-  <script src="build/main.js"></script>
-
-</body>
+	</body>
 </html>
+
+</apex:page>
+
