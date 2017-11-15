@@ -1,16 +1,14 @@
-import { Injectable, NgZone } from '@angular/core';
-import { Observable, Scheduler } from 'rxjs/Rx';
-
-// import { LoggerService, LOG_LEVEL } from './logger.service';
-
-import { ISObject } from '../shared/sobjects';
+import {Injectable, NgZone} from '@angular/core';
+import {ISObject} from '../shared/sobjects';
 import 'rxjs/add/operator/toPromise';
 
 import * as _ from 'lodash';
-
-declare var jsforce: any;
+// declare let jsforce: any;
 // let jsforce = require('jsforce');
 import * as moment from 'moment';
+import * as jsforce from 'jsforce';
+
+// import { LoggerService, LOG_LEVEL } from './logger.service';
 
 export enum API {
  REST,

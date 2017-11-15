@@ -1,32 +1,37 @@
 import {AfterViewInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
-import {ClaimService} from '../../services/claim.service';
 
-declare let FancyGrid: any;
+import {ClaimService} from '../../services/claim.service';
+import * as Highcharts from "highcharts";
+
+declare var FancyGrid: any;
 
 @Component({
-  selector: 'app-fancy-grid',
-  templateUrl: 'fancy-grid.component.html'
+  selector: 'app-country-table',
+  templateUrl: './country-table.component.html'
 })
-export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CountryTableComponent implements OnInit, OnDestroy, AfterViewInit  {
+
   private config;
   public myGrid;
   private pieChartConfig: Object;
 
-  constructor(private zone: NgZone,  private claimService: ClaimService) {
-  }
+  constructor(private zone: NgZone,  private claimService: ClaimService) { }
 
   ngOnInit() {
+
   }
 
   ngAfterViewInit() {
-    this.claimService.getUserClaims().then(res => {
-      this.config = this.loadGridConfig(res);
+    this.claimService.getUserClaimsByCountry().then(res => {
+      this.config = this.loadGridConfig(res[0].gridData);
+      this.loadPieChart(res[0].pieChartData);
       this.zone.runOutsideAngular(() => {
         this.myGrid = new FancyGrid(this.config);
       });
     });
-
-    this.loadPieChart();
+    Highcharts.setOptions({
+      colors: ['#634b37', '#98785e', '#6eaab0', 'b9dde5']
+    });
   }
 
   ngOnDestroy() {
@@ -35,8 +40,8 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private loadGridConfig(gridData) {
     return {
-      title: 'All Claims',
-      renderTo: 'claimsTable',
+      title: 'Claims by Country',
+      renderTo: 'countryTable',
       width: '700',
       height: '400',
       selModel: 'row',
@@ -44,7 +49,7 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
       summary: true,
       theme: 'gray',
       data: {
-        fields: ['name', 'beneficialOwner', 'portfolioCode', 'country', 'claimed', 'refunded', 'paid'],
+        fields: ['country', 'claimed', 'paid'],
         items: gridData
       },
       defaults: {
@@ -64,29 +69,6 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
         pageSizeData: [5, 10, 20, 50]
       },
       columns: [{
-        index: 'name',
-        type: 'string',
-        title: 'Claim Number',
-        summary: function(){
-          return '';
-        },
-      },
-        {
-          index: 'beneficialOwner',
-          title: 'Beneficial Owner',
-          flex: 1,
-          type: 'string',
-          summary: function(){
-            return '';
-          }
-        }, {
-          index: 'portfolioCode',
-          title: 'Portfolio Code',
-          type: 'string',
-          summary: function(){
-            return '';
-          }
-        }, {
           index: 'country',
           title: 'Country',
           summary: function(){
@@ -96,11 +78,7 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
           index: 'claimed',
           title: 'Claimed',
           format: 'number'
-        } , {
-          index: 'refunded',
-          title: 'Refunded',
-          format: 'number'
-        } , {
+        }, {
           index: 'paid',
           title: 'Paid',
           format: 'number'
@@ -108,8 +86,7 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
     };
   }
 
-  private loadPieChart() {
-    this.claimService.getUserClaimsChart().then(res => {
+  private loadPieChart(pieChartData) {
       this.pieChartConfig = {
         chart: {
           plotBackgroundColor: null,
@@ -119,7 +96,7 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
           type: 'pie'
         },
         title: {
-          text: 'Claims totals'
+          text: 'Refunded by Country'
         },
         tooltip: {
           pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -144,11 +121,9 @@ export class FancyGridComponent implements OnInit, OnDestroy, AfterViewInit {
               }
             }
           },
-          data: res
+          data: pieChartData
         }]
       };
-    });
   }
+
 }
-
-

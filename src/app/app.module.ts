@@ -1,14 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {BrowserModule} from '@angular/platform-browser';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import {MyApp} from './app.component';
+import {HomePage} from '../pages/home/home';
+import {ListPage} from '../pages/list/list';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { FancyGridComponent } from '../pages/fancy-grid/fancy-grid.component';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {FancyGridComponent} from '../pages/fancy-grid/fancy-grid.component';
 
 import {ChartModule} from 'angular2-highcharts';
 import {HighchartsStatic} from 'angular2-highcharts/dist/HighchartsService';
@@ -18,6 +18,10 @@ import * as brokenAxis from 'highcharts/js/modules/broken-axis';
 import * as highmaps from 'highcharts/js/modules/map';
 import {SalesforceService} from "../services/salesforce.service";
 import {ClaimService} from "../services/claim.service";
+import {CountryTableComponent} from "../pages/country-table/country-table.component";
+import {StatusTableComponent} from "../pages/status-table/status-table.component";
+import {ProfileComponent} from "../pages/profile/profile.component";
+import {SalesforceResolver} from "../services/salesforceResolver.service";
 
 export function highchartsFactory() {
   // Initialize addons.
@@ -32,7 +36,11 @@ export function highchartsFactory() {
     MyApp,
     HomePage,
     ListPage,
-    FancyGridComponent
+    FancyGridComponent,
+    CountryTableComponent,
+    StatusTableComponent,
+    ProfileComponent
+
   ],
   imports: [
     BrowserModule,
@@ -51,9 +59,17 @@ export function highchartsFactory() {
     SplashScreen,
     SalesforceService,
     ClaimService,
+    SalesforceResolver,
     {
       provide: HighchartsStatic,
       useFactory: highchartsFactory
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory:
+        (config: SalesforceResolver) => () => config.resolve(),
+        deps: [SalesforceResolver],
+        multi: true
     },
     {
       provide: ErrorHandler,
@@ -61,4 +77,8 @@ export function highchartsFactory() {
     }
   ]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private sfdc: SalesforceService) {
+    this.sfdc.controller = 'CTRL_WTaxCommunityApp';
+  }
+}
