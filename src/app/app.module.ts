@@ -24,6 +24,9 @@ import {ProfileComponent} from "../pages/profile/profile.component";
 import {SalesforceAuthenticate} from "../services/salesforceAuthenticate.service";
 import {LogoutComponent} from "../pages/logout/logout";
 import {ProfileInfoPage} from "../pages/profile-info/profile-info";
+import {FilterComponent} from "../components/filter/filter";
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import {FilterService} from "../services/filter.service";
 
 export function highchartsFactory() {
   // Initialize addons.
@@ -43,12 +46,14 @@ export function highchartsFactory() {
     StatusTableComponent,
     ProfileComponent,
     LogoutComponent,
-    ProfileInfoPage
+    ProfileInfoPage,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    ChartModule
+    ChartModule,
+    AngularMultiSelectModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -62,6 +67,7 @@ export function highchartsFactory() {
     SplashScreen,
     SalesforceService,
     ClaimService,
+    FilterService,
     SalesforceAuthenticate,
     {
       provide: HighchartsStatic,

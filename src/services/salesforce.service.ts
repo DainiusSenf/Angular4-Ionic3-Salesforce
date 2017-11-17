@@ -23,8 +23,9 @@ export interface RemotingOptions {
 
 @Injectable()
 export class SalesforceService {
+  serverUrl: string;
 
-	public conn: any;
+  public conn: any;
 	public useRest: boolean = (<any>window).local || false;
 	public apiVersion: string = '40.0'
 	private restConnectionType: ['soap', 'oauth'];
@@ -71,17 +72,12 @@ export class SalesforceService {
 		}
 	}
 
-	public logout(){
-    if (!this.conn) {
-      this.conn.logout(function (err) {
-        if (err) {
-          return console.error(err);
-        }
-        // now the session has been expired.
-      });
-    } else {
-      console.log('Session does not exist');
-    }
+	/**
+   * Redirect to Salesforce logout link
+   */
+	public endSession(){
+    this.serverUrl = `${window.location.protocol}//${window.location.hostname}`;
+    window.location.href = this.serverUrl + 'customers/secur/logout.jsp';
   }
 
 	/**
@@ -189,7 +185,8 @@ export class SalesforceService {
 				params[key] = this.processSobject(params[key]);
 			}
 		}
-
+    console.log('execute_Rest');
+    console.log(this.conn);
 		return new Promise((resolve, reject) => {
 			self.conn.execute(pkg, method, params, null)
 				.then((res) => {
@@ -207,6 +204,8 @@ export class SalesforceService {
 		let ctrl: any = window[controller] || {};
 		let self = this;
 
+    console.log('execute_vfr');
+    console.log(this.conn);
 		config = config || { escape: false }
 
 		// Make sure the controller has the method we're attempting to call

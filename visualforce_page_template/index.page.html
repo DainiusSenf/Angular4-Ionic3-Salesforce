@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <title>Ionic App</title>
+  <title>WTax community app</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="format-detection" content="telephone=no"/>
   <meta name="msapplication-tap-highlight" content="no"/>
@@ -16,7 +16,6 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <!--<script src="cordova.js"></script>-->
   <script src="<%= app_directory %>assets/js/fancy.min.js"></script>
@@ -29,6 +28,9 @@
   <% } else { %>
   <script type="text/javascript">
     window._sf.api = "{!JSENCODE($Api.Session_ID)}";
+    if (window._sf.api == 'NULL_SESSION_ID')
+      window.location = '/customers/VFP_CC_Login?startURL=%2Fcustomers';
+
   </script>
   <% } %>
   <!-- un-comment this code to enable service worker
@@ -45,17 +47,10 @@
 
 
 </head>
-
-	<head>
-		<base href="<%= baseUrl %>"/>
-		<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>WTax community app</title>
-
-	</head>
   <body>
 
   <!-- Ionic's root component and where the app will load -->
+
   <ion-app></ion-app>
 
   <!-- The polyfills js is generated during the build process -->

@@ -14,11 +14,15 @@ export class SalesforceAuthenticate {
           console.log('Already authenticated with SF');
           resolve(true);
       } else if (sf.api) {
+        console.log('Authenticated using session API');
+        console.log('${window.location.protocol}//${window.location.hostname}');
+        console.log(`${window.location.protocol}//${window.location.hostname}`);
+        console.log(sf.api);
+
         this.salesforceService.conn = new jsforce.Connection({
           sessionId: sf.api,
           serverUrl: `${window.location.protocol}//${window.location.hostname}`
         });
-        console.log('Authenticated using session API');
         resolve(true);
       } else if (sf.auth) {
         this.salesforceService.authenticate(sf.auth.login_url, sf.auth.username, sf.auth.password, sf.auth.oauth2)

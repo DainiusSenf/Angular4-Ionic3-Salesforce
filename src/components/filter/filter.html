@@ -1,0 +1,52 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <div (blur)="onBlur($event)" tabindex="1">
+        <label>Status</label>
+        <angular2-multiselect [data]="statusesList"
+                              [(ngModel)]="selectedStatuses"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div (blur)="onBlur($event)" tabindex="1">
+        <label>Country</label>
+        <angular2-multiselect [data]="countriesList"
+                              [(ngModel)]="selectedCountries"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+      </div>
+    </ion-col>
+    <ion-col>
+      <label>Claim Type</label>
+      <angular2-multiselect [data]="itemList"
+                            [(ngModel)]="selectedItems"
+                            [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </ion-col>
+    <ion-col>
+      <label>Beneficial Owner</label>
+      <angular2-multiselect [data]="itemList"
+                            [(ngModel)]="selectedItems"
+                            [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </ion-col>
+  </ion-row>
+</ion-grid>
