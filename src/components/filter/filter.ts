@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FilterService} from "../../services/filter.service";
+import {LoadingController} from "ionic-angular";
 
 @Component({
   selector: 'app-filter',
@@ -7,6 +8,8 @@ import {FilterService} from "../../services/filter.service";
 })
 export class FilterComponent {
 
+  private showExpandedSearch: boolean;
+  private showFiltersMobile: boolean;
   itemList = [];
   countriesList = [];
   selectedCountries = [];
@@ -21,11 +24,19 @@ export class FilterComponent {
     statuses: []
   };
 
-  constructor(private filterService : FilterService) {
+  private loading;
+
+  constructor(private filterService : FilterService,
+              public loadingCtrl: LoadingController) {
+
+    this.showExpandedSearch = false;
+    this.showFiltersMobile = false;
     this.getStatuses(JSON.stringify(this.filter));
   }
 
   ngOnInit() {
+
+
 
     // this.countriesList = [
     //   {"id": 1,"itemName":  "LTU"} ,
@@ -86,13 +97,26 @@ export class FilterComponent {
     this.getStatuses(JSON.stringify(this.filter));
   }
 
+  onShowHideExtSearch() {
+    this.showExpandedSearch = !this.showExpandedSearch;
+  }
+
+  openMobileFilters(){
+    this.showFiltersMobile = !this.showFiltersMobile;
+  }
+
   getStatuses(filterString) {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
     this.filterService.getStatusValues(filterString).then(res => {
       console.log('getStatusValues res');
       if(res) {
         this.countriesList = res[0].countries;
         this.statusesList = res[0].statuses;
       }
+      this.loading.dismiss();
       console.log(res);
     });
   }

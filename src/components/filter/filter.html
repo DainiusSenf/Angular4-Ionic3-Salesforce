@@ -1,4 +1,4 @@
-<ion-grid>
+<ion-grid class="hideOnPhone">
   <ion-row>
     <ion-col>
       <div (blur)="onBlur($event)" tabindex="1">
@@ -48,5 +48,116 @@
                             (onDeSelectAll)="onDeSelectAll($event)">
       </angular2-multiselect>
     </ion-col>
+  </ion-row>
+  <div text-center [hidden]="showExpandedSearch">
+    <button icon-only class="background-white fill-width" (click)="onShowHideExtSearch();">
+      <ion-icon name="ios-arrow-down"></ion-icon>
+    </button>
+  </div>
+  <ion-row *ngIf="showExpandedSearch">
+    <ion-col>
+      <div (blur)="onBlur($event)" tabindex="1">
+        <label>Status</label>
+        <angular2-multiselect [data]="statusesList"
+                              [(ngModel)]="selectedStatuses"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div (blur)="onBlur($event)" tabindex="1">
+        <label>Country</label>
+        <angular2-multiselect [data]="countriesList"
+                              [(ngModel)]="selectedCountries"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+      </div>
+    </ion-col>
+    <ion-col>
+      <label>Claim Type</label>
+      <angular2-multiselect [data]="itemList"
+                            [(ngModel)]="selectedItems"
+                            [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </ion-col>
+    <ion-col>
+      <label>Beneficial Owner</label>
+      <angular2-multiselect [data]="itemList"
+                            [(ngModel)]="selectedItems"
+                            [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </ion-col>
+  </ion-row>
+  <div text-center [hidden]="!showExpandedSearch">
+    <button icon-only class="background-white fill-width" (click)="onShowHideExtSearch();">
+      <ion-icon name="ios-arrow-up"></ion-icon>
+    </button>
+  </div>
+</ion-grid>
+
+<ion-grid class="showOnPhone" *ngIf="showFiltersMobile">
+  <ion-row>
+      <div (blur)="onBlur($event)" tabindex="1" class="fill-width">
+        <angular2-multiselect [data]="statusesList"
+                              [(ngModel)]="selectedStatuses"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+      </div>
+  </ion-row>
+  <ion-row>
+      <div (blur)="onBlur($event)" tabindex="1" class="fill-width">
+        <angular2-multiselect [data]="countriesList"
+                              [(ngModel)]="selectedCountries"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)">
+        </angular2-multiselect>
+      </div>
+  </ion-row>
+  <ion-row>
+    <div (blur)="onBlur($event)" tabindex="1" class="fill-width">
+      <angular2-multiselect [data]="itemList"
+                            [(ngModel)]="selectedItems"
+                            [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </div>
+  </ion-row>
+  <ion-row>
+    <div (blur)="onBlur($event)" tabindex="1" class="fill-width">
+      <angular2-multiselect [data]="itemList"
+                            [(ngModel)]="selectedItems"
+                            [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </div>
   </ion-row>
 </ion-grid>

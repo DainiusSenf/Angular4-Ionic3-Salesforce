@@ -1,10 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, Inject, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {HomePage} from '../pages/home/home';
-import {FancyGridComponent} from "../pages/fancy-grid/fancy-grid.component";
 import {ProfileInfoPage} from "../pages/profile-info/profile-info";
 import {LogoutComponent} from "../pages/logout/logout";
 

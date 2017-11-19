@@ -1,3 +1,4 @@
+///<reference path="../components/filter/filter.ts"/>
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
@@ -89,5 +90,7 @@ export function highchartsFactory() {
 export class AppModule {
   constructor(private sfdc: SalesforceService) {
     this.sfdc.controller = 'CTRL_WTaxCommunityApp';
+
   }
+
 }
