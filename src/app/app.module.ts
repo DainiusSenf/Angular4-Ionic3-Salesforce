@@ -2,6 +2,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
@@ -50,7 +51,8 @@ export function highchartsFactory() {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     ChartModule,
-    AngularMultiSelectModule
+    AngularMultiSelectModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

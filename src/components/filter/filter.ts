@@ -2,10 +2,26 @@ import { Component } from '@angular/core';
 import {FilterService} from "../../services/filter.service";
 import {LoadingController} from "ionic-angular";
 import {FilterSettings, FilterValues} from "../../models/filterSettings";
+import {animate, style, transition, trigger} from "@angular/core";
 
 @Component({
   selector: 'app-filter',
-  templateUrl: 'filter.html'
+  templateUrl: 'filter.html',
+  animations: [
+    trigger
+    (
+      'mapAnim', [
+        transition(':enter', [
+          style({height:'0px', opacity: 0, minHeight:0}),
+          animate('300ms ease-in-out', style( {  height:'*',opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({opacity: 1}),
+          animate('300ms ease-in-out', style({height:'0px', opacity: 0, minHeight:0}))
+        ])
+      ]
+    )
+  ]
 })
 export class FilterComponent {
 
