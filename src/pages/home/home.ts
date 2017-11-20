@@ -15,7 +15,7 @@ export class HomePage {
   }
 
   openMobileFiltersHome(){
-    this.filterComp.openMobileFilters();
+    this.filterComp.onOpenMobileFilters();
   }
 
 }

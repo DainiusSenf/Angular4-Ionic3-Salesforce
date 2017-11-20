@@ -7,7 +7,7 @@ export class ClaimService {
   constructor(private sfdc: SalesforceService) {}
 
   public getUserClaims(): Promise<any> {
-    return this.sfdc.execute('getUserClaims', {})
+    return this.sfdc.execute('CTRL_WTaxCommunityApp','getUserClaims', {})
       .then((res) => {
         return res;
       }, (err) => {
@@ -15,7 +15,7 @@ export class ClaimService {
   }
 
   public getUserClaimsChart(): Promise<any> {
-    return this.sfdc.execute('getUserClaimsChart', {})
+    return this.sfdc.execute('CTRL_WTaxCommunityApp','getUserClaimsChart', {})
       .then((res) => {
         return res;
       }, (err) => {
@@ -23,7 +23,7 @@ export class ClaimService {
   }
 
   public getUserClaimLinesTable(): Promise<any> {
-    return this.sfdc.execute('getUserClaimLines', {})
+    return this.sfdc.execute('CTRL_WTaxCommunityApp','getUserClaimLines', {})
       .then((res) => {
         return res;
       }, (err) => {
@@ -31,7 +31,7 @@ export class ClaimService {
   }
 
   public getUserClaimsByCountry(): Promise<any> {
-    return this.sfdc.execute('getUserClaimsByCountry', {})
+    return this.sfdc.execute('CTRL_WTaxCommunityApp','getUserClaimsByCountry', {})
       .then((res) => {
         return res;
       }, (err) => {
@@ -39,7 +39,7 @@ export class ClaimService {
   }
 
   public getClaimsByStatus(): Promise<any> {
-    return this.sfdc.execute('getClaimsByStatus', {})
+    return this.sfdc.execute('CTRL_WTaxCommunityApp','getClaimsByStatus', {})
       .then((res) => {
         return res;
       }, (err) => {
@@ -47,7 +47,7 @@ export class ClaimService {
   }
 
   public getUserInformation(): Promise<any> {
-    return this.sfdc.execute('getUserInformation', {})
+    return this.sfdc.execute('CTRL_WTaxCommunityApp','getUserInformation', {})
       .then((res) => {
         return res;
       }, (err) => {

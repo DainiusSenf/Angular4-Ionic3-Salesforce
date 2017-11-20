@@ -1,5 +1,5 @@
 import {Injectable, NgZone} from '@angular/core';
-import {ISObject} from '../shared/sobjects';
+import {ISObject} from '../models/sobjects';
 import 'rxjs/add/operator/toPromise';
 
 import * as _ from 'lodash';
@@ -28,7 +28,6 @@ export class SalesforceService {
   public conn: any;
 	public useRest: boolean = (<any>window).local || false;
 	public apiVersion: string = '40.0'
-	private restConnectionType: ['soap', 'oauth'];
 	public oauth2: any;
 	public controller: string;
 
@@ -77,7 +76,7 @@ export class SalesforceService {
    */
 	public endSession(){
     this.serverUrl = `${window.location.protocol}//${window.location.hostname}`;
-    window.location.href = this.serverUrl + 'customers/secur/logout.jsp';
+    window.location.href = this.serverUrl + '/customers/secur/logout.jsp';
   }
 
 	/**
@@ -92,14 +91,14 @@ export class SalesforceService {
 	 * @return {Promise<any>} 	 Returns a promise with the result or rejects with the
 	 * 						     remoting exception.
 	 */
-	public execute(method: string, params?: Object, vfrOptions?: RemotingOptions): Promise<any> {
+	public execute(controller : string, method: string, params?: Object, vfrOptions?: RemotingOptions): Promise<any> {
 			console.log('Executing method: ' + method);
 			console.log('Params:', params);
 
 		// this.log.group('Executing method: ' + method, LOG_LEVEL.DEBUG);
 		// this.log.debug('Params:',params);
 
-		let controller = this.controller;
+		// let controller = this.controller;
 		let p: Promise<any> = new Promise((resolve, reject) => {
 			if (this.useRest) {
 				console.log('Using REST API');

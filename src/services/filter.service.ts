@@ -7,7 +7,7 @@ export class FilterService {
   constructor(private sfdc: SalesforceService) { }
 
   public getStatusValues(filter): Promise<any> {
-    return this.sfdc.execute('getPicklistsValues', {filter: filter})
+    return this.sfdc.execute('CTRL_Filtering', 'getPicklistsValues', {filter: filter})
       .then((res) => {
         return res;
       }, (err) => {
